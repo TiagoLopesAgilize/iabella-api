@@ -6,9 +6,9 @@ const path = require('path');
 const restify = require('restify');
 
 const accountSid = 'ACe49effcfdabf3a121f32936b5e330352';
-const authToken = '1acc867f05dacefcd8f60207e1317979';
+const authToken = 'bd75407b2835fb740f1d85d8299852dc';
 const client = require('twilio')(accountSid, authToken);
-
+const { MessagingResponse } = require('twilio').twiml;
 
 
 // Import required bot services.
@@ -67,16 +67,17 @@ server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async(context) => {
         // Route to main dialog.
 
-        client.messages
+        /*  client.messages
             .create({
+                mediaUrl: ['https://images.unsplash.com/photo-1545093149-618ce3bcf49d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'],
                 from: 'whatsapp:+551132303176',
                 body: `${context._activity.text}`,
-                to: 'whatsapp:+5511982048048'
+                to: 'whatsapp:+5511991493689'
             })
             .then(message => console.log(message.sid));
+*/
 
-
-        //  await bot.run(context);
+        await bot.run(context);
     });
 });
 
@@ -96,19 +97,30 @@ server.post('/api/whatsapp/messages', (req, res) => {
     */
 
 
+    /*
+        adapter.processActivity(req, res, async(context) => {
+            // Route to main dialog.
 
-    adapter.processActivity(req, res, async(context) => {
+            await bot.run(context);
+        });
+    */
+    /*
+        client.messages
+            .create({
+                // mediaUrl: ['https://images.unsplash.com/photo-1545093149-618ce3bcf49d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'],
+                //type: "video/mp4",
+                mediaUrl: ['http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'],
+                from: 'whatsapp:+551132303176',
+                body: `veja o video`,
+                to: 'whatsapp:+5511991493689'
+            })
+            .then(message => console.log(message.sid));
+
+    */
+    whatsAppAdapter.processActivity(req, res, async(context) => {
         // Route to main dialog.
-
         await bot.run(context);
     });
-
-
-
-    /* whatsAppAdapter.processActivity(req, res, async(context) => {
-         // Route to main dialog.
-         await bot.run(context);
-     });*/
 });
 
 
